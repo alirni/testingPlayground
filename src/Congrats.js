@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
  * @function
  * @returns {JSX.Element} - Rendered component
  */
-export default props => {
+const Congrats = props => {
   const { success } = props;
 
   if (success) {
@@ -19,3 +19,9 @@ export default props => {
     return <div data-test="componentCongrats"></div>;
   }
 };
+
+Congrats.propTypes = {
+  success: PropTypes.bool,
+};
+
+export default Congrats;
