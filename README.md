@@ -1,2 +1,2 @@
 # testingPlayground
-Playground fro Jest and Enzyme
+Playground for Jest and Enzyme
