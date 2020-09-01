@@ -4,8 +4,6 @@ import { shallow } from 'enzyme';
 import { findByTestAttr, storeFactory } from '../test/testUtils';
 import Input from './Input';
 
-const defaultProps = {};
-
 /**
  * Create a ShallowWrapper for th GuessedWords component.
  * @function setup
@@ -13,22 +11,36 @@ const defaultProps = {};
  * @returns {ShalloeWrapper}
  */
 const setup = (initialState = {}) => {
-  // const setupProps = { ...defaultProps, ...props };
   const store = storeFactory(initialState);
-  return shallow(<Input store={store} />).dive();
+  return shallow(<Input store={store} />)
+    .dive()
+    .dive();
 };
 
 describe('render', () => {
   describe('word has not been guessed', () => {
-    test('renders conponent without error', () => {
-      // const wrapper = shallow(<Input />);
-      // const component = wrapper.find(`[data-test=""]`);
+    let wrapper;
+    beforeEach(() => {
+      const initialState = { success: false };
+      wrapper = setup(initialState);
     });
 
-    test('renders input box', () => {});
+    test('renders conponent without error', () => {
+      const component = findByTestAttr(wrapper, 'componentInput');
+      expect(component.length).toBe(1);
+    });
 
-    test('renders submit button', () => {});
+    test('renders input box', () => {
+      const inputBox = findByTestAttr(wrapper, 'inputBox');
+      expect(inputBox.length).toBe(1);
+    });
+
+    test('renders submit button', () => {
+      const submitButton = findByTestAttr(wrapper, 'submitButton');
+      expect(submitButton.length).toBe(1);
+    });
   });
+
   describe('word has been guessed', () => {
     test('renders conponent without error', () => {});
 
