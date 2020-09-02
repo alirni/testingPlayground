@@ -10,6 +10,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "axios": "^0.20.0",
     "check-prop-types": "^1.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -29,7 +30,8 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.0.1",
     "jest-enzyme": "^7.1.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "moxios": "^0.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
