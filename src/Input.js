@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Input = props => {
-  const { success } = props;
+  const { success, secretWord } = props;
+  const [currentGuess, setCurrentGuess] = React.useState('');
 
   // const submitGuessedWord = event => {
   //   const { guessWord } = this.props;
@@ -13,15 +15,14 @@ const Input = props => {
   //   }
   // };
 
-  // const { currentGuess } = this.state;
   const contents = success ? null : (
     <form>
       <input
         data-test="inputBox"
         type="text"
         placeholder="enter guess"
-        // value={currentGuess}
-        onChange={event => this.setState({ currentGuess: event.target.value })}
+        value={currentGuess}
+        onChange={event => setCurrentGuess(event.target.value)}
       />
       <button data-test="submitButton" type="submit">
         Submit
@@ -35,5 +36,9 @@ const Input = props => {
 // const mapStateToProps = ({ success }) => {
 //   return { success };
 // };
+
+Input.propTypes = {
+  secretWord: PropTypes.string.isRequired,
+};
 
 export default Input;
