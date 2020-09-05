@@ -2,18 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = props => {
-  const { success, secretWord } = props;
+  const { success, secretWord, guessWord } = props;
   const [currentGuess, setCurrentGuess] = React.useState('');
 
-  // const submitGuessedWord = event => {
-  //   const { guessWord } = this.props;
-  //   const { currentGuess } = this.state;
-  //   event.preventDefault();
-  //   if (currentGuess && currentGuess.length > 0) {
-  //     guessWord(currentGuess);
-  //     this.setState({ currentGuess: '' });
-  //   }
-  // };
+  const submitGuessedWord = event => {
+    event.preventDefault();
+    // if (currentGuess && currentGuess.length > 0) {
+    // guessWord(currentGuess);
+    setCurrentGuess('');
+    // }
+  };
 
   const contents = success ? null : (
     <form>
@@ -24,7 +22,7 @@ const Input = props => {
         value={currentGuess}
         onChange={event => setCurrentGuess(event.target.value)}
       />
-      <button data-test="submitButton" type="submit">
+      <button data-test="submitButton" type="submit" onClick={submitGuessedWord}>
         Submit
       </button>
     </form>
