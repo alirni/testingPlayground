@@ -1,51 +1,39 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
-import { guessWord } from './actions';
+const Input = props => {
+  const { success } = props;
 
-export class UnconnectedInput extends Component {
-  constructor(props) {
-    super(props);
+  // const submitGuessedWord = event => {
+  //   const { guessWord } = this.props;
+  //   const { currentGuess } = this.state;
+  //   event.preventDefault();
+  //   if (currentGuess && currentGuess.length > 0) {
+  //     guessWord(currentGuess);
+  //     this.setState({ currentGuess: '' });
+  //   }
+  // };
 
-    this.state = {
-      currentGuess: null,
-    };
-  }
+  // const { currentGuess } = this.state;
+  const contents = success ? null : (
+    <form>
+      <input
+        data-test="inputBox"
+        type="text"
+        placeholder="enter guess"
+        // value={currentGuess}
+        onChange={event => this.setState({ currentGuess: event.target.value })}
+      />
+      <button data-test="submitButton" type="submit">
+        Submit
+      </button>
+    </form>
+  );
 
-  submitGuessedWord = event => {
-    const { guessWord } = this.props;
-    const { currentGuess } = this.state;
-    event.preventDefault();
-    if (currentGuess && currentGuess.length > 0) {
-      guessWord(currentGuess);
-      this.setState({ currentGuess: '' });
-    }
-  };
-
-  render() {
-    const { success } = this.props;
-    const { currentGuess } = this.state;
-    const contents = success ? null : (
-      <form>
-        <input
-          data-test="inputBox"
-          type="text"
-          placeholder="enter guess"
-          value={currentGuess}
-          onChange={event => this.setState({ currentGuess: event.target.value })}
-        />
-        <button data-test="submitButton" type="submit" onClick={this.submitGuessedWord}>
-          Submit
-        </button>
-      </form>
-    );
-
-    return <div data-test="componentInput">{contents}</div>;
-  }
-}
-
-const mapStateToProps = ({ success }) => {
-  return { success };
+  return <div data-test="componentInput">{contents}</div>;
 };
 
-export default connect(mapStateToProps, { guessWord })(UnconnectedInput);
+// const mapStateToProps = ({ success }) => {
+//   return { success };
+// };
+
+export default Input;
