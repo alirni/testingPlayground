@@ -18,6 +18,7 @@ export class UnconnectedInput extends Component {
     event.preventDefault();
     if (currentGuess && currentGuess.length > 0) {
       guessWord(currentGuess);
+      this.setState({ currentGuess: '' });
     }
   };
 
