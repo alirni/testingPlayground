@@ -1,21 +1,35 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { findByTestAttr } from '../test/testUtils';
+import hookActions from './actions/hookActions';
 import App from './App';
 
+const mockGetSecretWord = jest.fn();
+
 /**
- * Create a ShallowWrapper for th GuessedWords component.
+ * Create a ReactWrapper for the App component.
  * @function setup
- * @param {object} state - State for setup.
- * @returns {ShalloeWrapper}
+ * @returns {ReactWrapper}
  */
 const setup = () => {
-  return shallow(<App />);
+  mockGetSecretWord.mockClear();
+  hookActions.getSecretWord = mockGetSecretWord;
+
+  // use mount, because useEffect not called on `shallow`
+  return mount(<App />);
 };
 
 test('App renders without error', () => {
   const wrapper = setup();
   const app = findByTestAttr(wrapper, 'componentApp');
   expect(app.length).toBe(1);
+});
+
+describe('getSecretWord calls', () => {
+  test('getSecretWord gets called on app mount', () => {
+    setup();
+
+    expect(mockGetSecretWord).toHaveBeenCalled();
+  });
 });
