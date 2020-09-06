@@ -32,12 +32,16 @@ const App = () => {
     hookActions.getSecretWord(setSecretWord);
   }, []);
 
+  if (!state.secretWord) {
+    return <div data-test="spinner">Loading...</div>;
+  }
+
   return (
     <div className="App" data-test="componentApp">
       <h1>Jotto</h1>
-      {/* <Congrats success={success} />
-      <Input />
-      <GuessedWords guessedWords={guessedWords} /> */}
+      {/* <Congrats success={success} /> */}
+      <Input secretWord={state.secretWord} />
+      {/* <GuessedWords guessedWords={guessedWords} /> */}
     </div>
   );
 };
